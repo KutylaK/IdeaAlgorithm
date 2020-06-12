@@ -20,27 +20,61 @@ namespace IdeaAlgorithm
         private void encryptButton_Click(object sender, EventArgs e)
         {
             var key =  IdeaAlgorithmImpl.makeKey(keyTextBox.Text);
-            var inputText = inputBox.Text;
             IdeaAlgorithmImpl ideaAlgorithmImpl = new IdeaAlgorithmImpl(key, true);
-            var encryptData = Encoding.ASCII.GetBytes(inputText);
+            var encryptData = GetASCIIBox(inputBox);
+
+            if (encryptData == null) return;
             var result = ideaAlgorithmImpl.crypt(encryptData);
             //outputBox.Text = string.Join(" ", encryptData);
-
-            outputBox.Text = Encoding.ASCII.GetString(result);
+            outputBox.Text = string.Join(" ", result);
         }
 
         private void decryptButton_Click(object sender, EventArgs e)
         {
             var key = IdeaAlgorithmImpl.makeKey(keyTextBox.Text);
-            var inputText = outputBox.Text;
             IdeaAlgorithmImpl ideaAlgorithmImpl = new IdeaAlgorithmImpl(key, false);
-            var encryptData = Encoding.ASCII.GetBytes(inputText);
+            var encryptData = GetASCIIBox(outputBox);
+
+            if (encryptData == null) return;
+
             var result = ideaAlgorithmImpl.crypt(encryptData);
+            inputBox.Text = string.Join(" ", result);
+        }
 
-            //inputBox.Text = string.Join(" ", encryptData);
+   
+        private byte[] GetASCIIBox(RichTextBox box)
+        {
+            try
+            {
+                var res = box.Text.Split(' ').Select(_ => Convert.ToByte(_)).ToArray();
+                return res;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Podany ciąg znaków powinien zostać przekonwertowany na bajty", "O nie!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
 
+        
+        private void toBytesButton_Click(object sender, EventArgs e)
+        {
+            var bytes = inputBox.Text.Select(_ => (byte)_);
+            inputBox.Text = string.Join(" ", bytes);
+        }
 
-            inputBox.Text = Encoding.ASCII.GetString(result);
+        private void toASCIIButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var encryptData = GetASCIIBox(inputBox);
+                if (encryptData == null) return;
+                inputBox.Text = Encoding.ASCII.GetString(encryptData);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Podanego wyrażenia nie da się zamienić na ASCII","O nie!" , MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

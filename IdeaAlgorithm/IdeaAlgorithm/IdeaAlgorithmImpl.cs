@@ -22,11 +22,15 @@ namespace IdeaAlgorithm
 
         public byte[] crypt(byte[] data)
         {
-            for (int i = 0; i < data.Length; i += 8)
+            var dataList = data.ToList();
+            while (dataList.Count % 8 != 0) dataList.Add((byte)0);
+
+            var dataExpanded = dataList.ToArray();
+            for (int i = 0; i < dataExpanded.Count(); i += 8)
             {
-                cryptPart(data, i);
+                cryptPart(dataExpanded, i);
             }
-            return data;
+            return dataExpanded;
         }
 
         public void cryptPart(byte[] data, int offset)
@@ -145,7 +149,7 @@ namespace IdeaAlgorithm
 
         public static byte[] makeKey(string charKey)
         {
-            return charKey.Select(_ => (byte)_).ToArray();
+            //return charKey.Select(_ => (byte)_).ToArray();
 
 
             int nofChar = 0x7E - 0x21 + 1;    // Number of different valid characters

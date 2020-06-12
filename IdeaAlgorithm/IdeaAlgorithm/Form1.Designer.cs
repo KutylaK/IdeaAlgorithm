@@ -34,6 +34,8 @@
             this.outputBox = new System.Windows.Forms.RichTextBox();
             this.encryptButton = new System.Windows.Forms.Button();
             this.decryptButton = new System.Windows.Forms.Button();
+            this.toBytesButton = new System.Windows.Forms.Button();
+            this.toASCIIButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // keyTextBox
@@ -54,23 +56,23 @@
             // 
             // inputBox
             // 
-            this.inputBox.Location = new System.Drawing.Point(91, 162);
+            this.inputBox.Location = new System.Drawing.Point(55, 89);
             this.inputBox.Name = "inputBox";
-            this.inputBox.Size = new System.Drawing.Size(229, 219);
+            this.inputBox.Size = new System.Drawing.Size(229, 111);
             this.inputBox.TabIndex = 2;
             this.inputBox.Text = "";
             // 
             // outputBox
             // 
-            this.outputBox.Location = new System.Drawing.Point(481, 162);
+            this.outputBox.Location = new System.Drawing.Point(481, 89);
             this.outputBox.Name = "outputBox";
-            this.outputBox.Size = new System.Drawing.Size(229, 219);
+            this.outputBox.Size = new System.Drawing.Size(229, 111);
             this.outputBox.TabIndex = 3;
             this.outputBox.Text = "";
             // 
             // encryptButton
             // 
-            this.encryptButton.Location = new System.Drawing.Point(362, 233);
+            this.encryptButton.Location = new System.Drawing.Point(339, 108);
             this.encryptButton.Name = "encryptButton";
             this.encryptButton.Size = new System.Drawing.Size(75, 23);
             this.encryptButton.TabIndex = 4;
@@ -80,7 +82,7 @@
             // 
             // decryptButton
             // 
-            this.decryptButton.Location = new System.Drawing.Point(362, 311);
+            this.decryptButton.Location = new System.Drawing.Point(339, 158);
             this.decryptButton.Name = "decryptButton";
             this.decryptButton.Size = new System.Drawing.Size(75, 23);
             this.decryptButton.TabIndex = 5;
@@ -88,11 +90,33 @@
             this.decryptButton.UseVisualStyleBackColor = true;
             this.decryptButton.Click += new System.EventHandler(this.decryptButton_Click);
             // 
+            // toBytesButton
+            // 
+            this.toBytesButton.Location = new System.Drawing.Point(55, 223);
+            this.toBytesButton.Name = "toBytesButton";
+            this.toBytesButton.Size = new System.Drawing.Size(111, 31);
+            this.toBytesButton.TabIndex = 6;
+            this.toBytesButton.Text = "Konwertuj na bajty";
+            this.toBytesButton.UseVisualStyleBackColor = true;
+            this.toBytesButton.Click += new System.EventHandler(this.toBytesButton_Click);
+            // 
+            // toASCIIButton
+            // 
+            this.toASCIIButton.Location = new System.Drawing.Point(172, 223);
+            this.toASCIIButton.Name = "toASCIIButton";
+            this.toASCIIButton.Size = new System.Drawing.Size(111, 31);
+            this.toASCIIButton.TabIndex = 7;
+            this.toASCIIButton.Text = "Konwertuj na ASCII";
+            this.toASCIIButton.UseVisualStyleBackColor = true;
+            this.toASCIIButton.Click += new System.EventHandler(this.toASCIIButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 278);
+            this.Controls.Add(this.toASCIIButton);
+            this.Controls.Add(this.toBytesButton);
             this.Controls.Add(this.decryptButton);
             this.Controls.Add(this.encryptButton);
             this.Controls.Add(this.outputBox);
@@ -114,6 +138,8 @@
         private System.Windows.Forms.RichTextBox outputBox;
         private System.Windows.Forms.Button encryptButton;
         private System.Windows.Forms.Button decryptButton;
+        private System.Windows.Forms.Button toBytesButton;
+        private System.Windows.Forms.Button toASCIIButton;
     }
 }
 
