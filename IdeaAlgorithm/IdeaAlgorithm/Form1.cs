@@ -51,7 +51,7 @@ namespace IdeaAlgorithm
             }
             catch (Exception)
             {
-                MessageBox.Show("Podany ciąg znaków powinien zostać przekonwertowany na bajty", "O nie!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Procesowane dane mają nieodpowiedni format", "O nie!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
