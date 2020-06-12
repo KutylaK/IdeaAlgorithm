@@ -16,5 +16,31 @@ namespace IdeaAlgorithm
         {
             InitializeComponent();
         }
+
+        private void encryptButton_Click(object sender, EventArgs e)
+        {
+            var key =  IdeaAlgorithmImpl.makeKey(keyTextBox.Text,16);
+            var inputText = inputBox.Text;
+            IdeaAlgorithmImpl ideaAlgorithmImpl = new IdeaAlgorithmImpl(key, true);
+            var encryptData = Encoding.ASCII.GetBytes(inputText);
+            var result = ideaAlgorithmImpl.crypt(encryptData);
+            //outputBox.Text = string.Join(" ", encryptData);
+
+            outputBox.Text = Encoding.ASCII.GetString(result);
+        }
+
+        private void decryptButton_Click(object sender, EventArgs e)
+        {
+            var key = IdeaAlgorithmImpl.makeKey(keyTextBox.Text, 16);
+            var inputText = outputBox.Text;
+            IdeaAlgorithmImpl ideaAlgorithmImpl = new IdeaAlgorithmImpl(key, false);
+            var encryptData = Encoding.ASCII.GetBytes(inputText);
+            var result = ideaAlgorithmImpl.crypt(encryptData);
+
+            //inputBox.Text = string.Join(" ", encryptData);
+
+
+            inputBox.Text = Encoding.ASCII.GetString(result);
+        }
     }
 }
