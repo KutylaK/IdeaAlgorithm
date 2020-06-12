@@ -19,7 +19,7 @@ namespace IdeaAlgorithm
 
         private void encryptButton_Click(object sender, EventArgs e)
         {
-            var key =  IdeaAlgorithmImpl.makeKey(keyTextBox.Text,16);
+            var key =  IdeaAlgorithmImpl.makeKey(keyTextBox.Text);
             var inputText = inputBox.Text;
             IdeaAlgorithmImpl ideaAlgorithmImpl = new IdeaAlgorithmImpl(key, true);
             var encryptData = Encoding.ASCII.GetBytes(inputText);
@@ -31,7 +31,7 @@ namespace IdeaAlgorithm
 
         private void decryptButton_Click(object sender, EventArgs e)
         {
-            var key = IdeaAlgorithmImpl.makeKey(keyTextBox.Text, 16);
+            var key = IdeaAlgorithmImpl.makeKey(keyTextBox.Text);
             var inputText = outputBox.Text;
             IdeaAlgorithmImpl ideaAlgorithmImpl = new IdeaAlgorithmImpl(key, false);
             var encryptData = Encoding.ASCII.GetBytes(inputText);
