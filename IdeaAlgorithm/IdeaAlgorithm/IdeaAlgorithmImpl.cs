@@ -35,36 +35,34 @@ namespace IdeaAlgorithm
 
         public void cryptPart(byte[] data, int offset)
         {
-            // Divide the 64-bit data block into four 16-bit sub-blocks (input of 1st round)
             int x1 = concat2Bytes(data[offset + 0], data[offset + 1]);
             int x2 = concat2Bytes(data[offset + 2], data[offset + 3]);
             int x3 = concat2Bytes(data[offset + 4], data[offset + 5]);
             int x4 = concat2Bytes(data[offset + 6], data[offset + 7]);
-            // Each round
-            int k = 0; // Subkey index
+            int k = 0; 
             for (int round = 0; round < rounds; round++)
             {
-                int y1 = mul(x1, keys[k++]);          // Multiply X1 and the first subkey
-                int y2 = add(x2, keys[k++]);          // Add X2 and the second subkey
-                int y3 = add(x3, keys[k++]);          // Add X3 and the third subkey
-                int y4 = mul(x4, keys[k++]);          // Multiply X4 and the fourth subkey
-                int y5 = y1 ^ y3;                       // XOR the results of y1 and y3
-                int y6 = y2 ^ y4;                       // XOR the results of y2 and y4
-                int y7 = mul(y5, keys[k++]);          // Multiply the results of y5 with the fifth subkey
-                int y8 = add(y6, y7);                   // Add the results of y6 and y7
-                int y9 = mul(y8, keys[k++]);          // Multiply the results of y8 with the sixth subkey
-                int y10 = add(y7, y9);                  // Add the results of y7 and y9
-                x1 = y1 ^ y9;                           // XOR the results of steps y1 and y9
-                x2 = y3 ^ y9;                           // XOR the results of steps y3 and y9
-                x3 = y2 ^ y10;                          // XOR the results of steps y2 and y10
-                x4 = y4 ^ y10;                          // XOR the results of steps y4 and y10
+                int y1 = mul(x1, keys[k++]);        
+                int y2 = add(x2, keys[k++]);        
+                int y3 = add(x3, keys[k++]);        
+                int y4 = mul(x4, keys[k++]);        
+                int y5 = y1 ^ y3;                   
+                int y6 = y2 ^ y4;                   
+                int y7 = mul(y5, keys[k++]);        
+                int y8 = add(y6, y7);               
+                int y9 = mul(y8, keys[k++]);        
+                int y10 = add(y7, y9);              
+                x1 = y1 ^ y9;                       
+                x2 = y3 ^ y9;                       
+                x3 = y2 ^ y10;                      
+                x4 = y4 ^ y10;                      
             }
-            // Final output transformation
-            int r0 = mul(x1, keys[k++]);              // Multiply X1 and the first subkey
-            int r1 = add(x3, keys[k++]);              // Add X2 and the second subkey (x2-x3 are swaped)
-            int r2 = add(x2, keys[k++]);              // Add X3 and the third subkey
-            int r3 = mul(x4, keys[k]);                // Multiply X4 and the fourth subkey
-                                                      // Reattach the four sub-blocks
+           
+            int r0 = mul(x1, keys[k++]);            
+            int r1 = add(x3, keys[k++]);            
+            int r2 = add(x2, keys[k++]);            
+            int r3 = mul(x4, keys[k]);              
+                                                    
             data[offset + 0] = (byte)(r0 >> 8);
             data[offset + 1] = (byte)r0;
             data[offset + 2] = (byte)(r1 >> 8);
@@ -108,21 +106,6 @@ namespace IdeaAlgorithm
         }
 
 
-        public static byte[] concat2Bytes(byte[] b1, byte[] b2)
-        {
-            byte[] output = new byte[b1.Length + b2.Length];
-            int i = 0;
-            foreach (byte aB1 in b1)
-            {
-                output[i++] = aB1;
-            }
-            foreach (byte aB2 in b2)
-            {
-                output[i++] = aB2;
-            }
-            return output;
-        }
-
         private static int[] invertSubKey(int[] key)
         {
             int[] invKey = new int[key.Length];
@@ -149,10 +132,7 @@ namespace IdeaAlgorithm
 
         public static byte[] makeKey(string charKey)
         {
-            //return charKey.Select(_ => (byte)_).ToArray();
-
-
-            int nofChar = 0x7E - 0x21 + 1;    // Number of different valid characters
+            int nofChar = 0x7E - 0x21 + 1; 
             int[] a = new int[8];
             for (int p = 0; p < charKey.Length; p++)
             {
@@ -192,14 +172,6 @@ namespace IdeaAlgorithm
                     return (1 - x - y) & 0xFFFF;
                 }
                 return 1;
-            }
-        }
-
-        public static void xor(byte[] a, int pos, byte[] b, int blockSize)
-        {
-            for (int p = 0; p < blockSize; p++)
-            {
-                a[pos + p] ^= b[p];
             }
         }
 
