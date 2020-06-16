@@ -25,7 +25,6 @@ namespace IdeaAlgorithm
 
             if (encryptData == null) return;
             var result = ideaAlgorithmImpl.crypt(encryptData);
-            //outputBox.Text = string.Join(" ", encryptData);
             outputBox.Text = string.Join(" ", result);
         }
 
